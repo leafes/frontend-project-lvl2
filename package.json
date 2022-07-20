@@ -17,6 +17,7 @@
     "url": "https://github.com/leafes/frontend-project-lvl2/issues"
   },
   "dependencies": {
-    "commander": "^9.4.0"
+    "commander": "^9.4.0",
+    "lodash": "^4.17.21"
   }
 }
