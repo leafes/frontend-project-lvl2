@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/leafes/frontend-project-lvl2/issues"
   },
-  "homepage": "https://github.com/leafes/frontend-project-lvl2#readme"
+  "homepage": "https://github.com/leafes/frontend-project-lvl2#readme",
+  "dependencies": {
+    "comander": "^0.0.1-security"
+  }
 }
