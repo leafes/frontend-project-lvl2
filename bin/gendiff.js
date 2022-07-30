@@ -5,10 +5,8 @@ import _ from 'lodash';
 const genDiff = (filepath1, filepath2) => {
     const file1Obj = JSON.parse(fs.readFileSync(filepath1, 'utf-8'));
     const file2Obj = JSON.parse(fs.readFileSync(filepath2, 'utf-8'));
-    const file1Array = _.sortBy(Object.entries(file1Obj), [(x) => x[0]])
-        .map((item) => [item[0], item[1], '-']);
-    const file2Array = _.sortBy(Object.entries(file2Obj), [(x) => x[0]])
-        .map((item) => [item[0], item[1], '+']);
+    const file1Array = Object.entries(file1Obj).map((item) => [item[0], item[1], '-']);
+    const file2Array = Object.entries(file2Obj).map((item) => [item[0], item[1], '+']);
 
     const intersec = _.intersectionWith(file1Array, file2Array,
         ([name1, value1], [name2, value2]) => name1 === name2 && value1 === value2)
