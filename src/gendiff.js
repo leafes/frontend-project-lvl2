@@ -20,8 +20,6 @@ const genDiff = (filepath1, filepath2) => {
     .map(([name, value, state]) => `${state ?? ' '} ${name} ${value}`)
     .join('\n');
 
-  console.log(`{\n${result}\n}`);
-
   return result;
 };
 

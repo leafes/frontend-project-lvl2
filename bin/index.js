@@ -1,3 +1,5 @@
+#!usr/bin/env node
+
 import { program } from 'commander';
 import genDiff from '../src/gendiff.js';
 
@@ -7,7 +9,7 @@ program
   .version('0.0.1', '-v, --vers', 'output the current version')
   .argument('<filepath1>')
   .argument('<filepath2>')
-  .action(genDiff);
+  .action((filepath1, filepath2) => console.log(`{\n${genDiff(filepath1, filepath2)}\n}`));
 
 program
   .option('-f, --format <type>', 'output format');
