@@ -1,4 +1,3 @@
-import { program } from 'commander';
 import * as fs from 'node:fs';
 import _ from 'lodash';
 
@@ -14,22 +13,13 @@ const genDiff = (filepath1, filepath2) => {
 
     const changed = _.union(file1Array, file2Array)
         .filter(([name]) => !intersec.flat().includes(name));
-    const result = _.sortBy(_.union(changed, intersec), ([name]) => name);
-    console.log('{');
-    _.forEach(result, 
-        ([name, value, state]) => console.log(state ?? ' ', name, value));
-    console.log('}');
+    let result = _.sortBy(_.union(changed, intersec), ([name]) => name)
+        .map(([name, value, state]) => `${state ?? ' '} ${name} ${value}`)
+        .join('\n')
+
+    console.log(`{\n${result}\n}`);
+
+    return result;
 };
 
-program
-    .name('gendiff')
-    .description('Compares two configuration files and shows a difference.')
-    .version('0.0.1', '-v, --vers', 'output the current version')
-    .argument('<filepath1>')
-    .argument('<filepath2>')
-    .action(genDiff)
-
-program
-    .option('-f, --format <type>', 'output format');
-
-program.parse();
+export default genDiff;

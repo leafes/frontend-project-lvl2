@@ -1,4 +1,8 @@
 install:
-npm install
+	npm install
 lint:
-eslint .
+	npx eslint .
+test: 
+	npm test
+publish: 
+	npm publish
