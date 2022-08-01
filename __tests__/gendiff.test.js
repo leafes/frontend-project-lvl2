@@ -1,4 +1,4 @@
-import genDiff from '../bin/gendiff';
+import genDiff from '../src/gendiff.js';
 
 let expectedResult;
 
