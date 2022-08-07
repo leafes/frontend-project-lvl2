@@ -36,7 +36,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Linter check
         run: make lint
-        
+      
       - name: Test & publish code coverage
         # Publish code coverage on Code Climate
         # https://github.com/paambaati/codeclimate-action
