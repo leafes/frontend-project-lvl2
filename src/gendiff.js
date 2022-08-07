@@ -1,5 +1,17 @@
 import * as fs from 'node:fs';
 import _ from 'lodash';
+import * as yaml from 'js-yaml';
+
+const fileToObj = (filepath) => {
+ switch (path.extname(filepath)) {
+  case 'json':
+    return yaml.load(fs.readFileSync(filepath, 'utf-8'));
+    break;
+  case 'yml':
+    return JSON.parse(fs.readFileSync(filepath, 'utf-8'));
+    break;
+ }
+};
 
 const genDiff = (filepath1, filepath2) => {
   const file1Obj = JSON.parse(fs.readFileSync(filepath1, 'utf-8'));
