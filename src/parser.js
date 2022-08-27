@@ -1,13 +1,16 @@
 import ini from 'ini';
 import yaml from 'js-yaml';
 
-const parser = (filepath) => {
-  if (path.extname(filepath) === '.yml'
-    || path.extname(filepath) === '.yaml') {
-    return yaml.load(fs.readFileSync(filepath, 'utf-8'));
-  }
+const getFormat = (content, ext) => {
+  const format = {
+    json: JSON.parse,
+    yml: yaml.load,
+    ini: ini.parse,
+  };
 
-  return JSON.parse(fs.readFileSync(filepath, 'utf-8'));
-};
+  return format[ext](content);
+  // format('yml') вернет yaml.parse
+  // yaml.parse(content) 
+}
 
-export default parser;
+export default getFormat;
