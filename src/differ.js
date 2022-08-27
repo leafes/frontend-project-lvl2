@@ -30,6 +30,6 @@ const getPropertyValues = (before, after, property) => {
             getValue,
         },
     ];
-    
+
     return actions.find(({ check }) => check(property));
 }
