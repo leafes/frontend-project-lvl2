@@ -10,7 +10,7 @@ const parse = (content, ext) => {
 
   return format[ext](content);
   // format('yml') вернет yaml.parse
-  // yaml.parse(content) 
-}
+  // yaml.parse(content)
+};
 
 export default parse;

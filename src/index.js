@@ -1,18 +1,18 @@
 import fs from 'fs';
 import path from 'path';
-import parse from './parser.js'
+import parse from './parser.js';
 import genDiff from './differ.js';
-import formatter from './formatters/index.js'
+import formatter from './formatters/index.js';
 
 const readFile = (pathFile) => {
   const fullPathFile = path.resolve(process.cwd(), pathFile);
   return fs.readFileSync(fullPathFile, 'utf-8');
-}
+};
 
 const getExtName = (pathFile) => {
   const fullPathFile = path.resolve(process.cwd(), pathFile);
   return path.extname(fullPathFile).slice(1);
-}
+};
 
 export default (pathFile1, pathFile2, type) => {
   const content1 = readFile(pathFile1);
