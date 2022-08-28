@@ -1,5 +1,5 @@
 import json from './json.js';
-import stylish from './tree.js';
+import stylish from './stylish.js';
 import plain from './plain.js';
 
 const getFormatter = (data, type) => {
