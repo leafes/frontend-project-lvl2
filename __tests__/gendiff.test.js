@@ -2,7 +2,7 @@ import fs from 'fs';
 import gendiff from '../src/index.js';
 
 const testFilesPath = '__fixtures__/';
-const expans = ['json', 'yml', 'yaml'];
+const expans = ['json', 'yml'];
 
 let resultStylish;
 let resultPlain;
