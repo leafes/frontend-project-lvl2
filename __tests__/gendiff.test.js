@@ -1,18 +1,25 @@
-import genDiff from '../src/index.js';
+import fs from 'fs';
+import gendiff from '../src/index.js';
 
-let expectedResult;
+const testFilesPath = `${__dirname}/../__fixtures__/`;
+const expans = ['json', 'yml', 'ini'];
 
-beforeAll(() => {
-  expectedResult = `- follow false
-  host hexlet.io
-- proxy 123.234.53.22
-- timeout 50
-+ timeout 20
-+ verbose true`;
+let resultTree;
+let resultPlain;
+let resultJson;
+
+beforeEach(() => {
+  resultTree = fs.readFileSync(`${testFilesPath}result_tree.txt`, 'utf-8');
+  resultPlain = fs.readFileSync(`${testFilesPath}result_plain.txt`, 'utf-8');
+  resultJson = fs.readFileSync(`${testFilesPath}result_json.txt`, 'utf-8');
 });
 
-test('genDiff', () => {
-  const data1 = '__fixtures__/file1.json';
-  const data2 = '__fixtures__/file2.yaml';
-  expect(genDiff(data1, data2)).toEqual(expectedResult);
+describe.each(expans)('gendiff %s', (exp) => {
+  const before = `${testFilesPath}file1.${exp}`;
+  const after = `${testFilesPath}file2.${exp}`;
+  test('gendiff', () => {
+    expect(gendiff(before, after, 'tree')).toEqual(resultTree.trim());
+    expect(gendiff(before, after, 'plain')).toEqual(resultPlain.trim());
+    expect(gendiff(before, after, 'json')).toEqual(resultJson.trim());
+  });
 });
