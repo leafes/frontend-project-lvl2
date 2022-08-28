@@ -5,9 +5,11 @@ const getFormat = (content, ext) => {
   const format = {
     json: JSON.parse,
     yml: yaml.load,
-    ini: ini.parse,
+    yaml: yaml.load,
   };
+
   return format[ext](content);
+
 };
 
 export default (content, ext) => getFormat(content, ext);
