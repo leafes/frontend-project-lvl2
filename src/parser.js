@@ -1,16 +1,13 @@
-import ini from 'ini';
 import yaml from 'js-yaml';
+import ini from 'ini';
 
-const parse = (content, ext) => {
+const getFormat = (content, ext) => {
   const format = {
     json: JSON.parse,
     yml: yaml.load,
     ini: ini.parse,
   };
-
   return format[ext](content);
-  // format('yml') вернет yaml.parse
-  // yaml.parse(content)
 };
 
-export default parse;
+export default (content, ext) => getFormat(content, ext);

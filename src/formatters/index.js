@@ -8,7 +8,7 @@ const getFormatter = (data, type) => {
     tree,
     plain,
   };
-
+  
   return formatters[type](data);
 };
 
