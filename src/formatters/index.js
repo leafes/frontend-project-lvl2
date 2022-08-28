@@ -8,7 +8,7 @@ const getFormatter = (data, type) => {
     stylish,
     plain,
   };
-
+  if (!Object.hasOwn(formatters, type)) return formatters['stylish'](data)
   return formatters[type](data);
 };
 
