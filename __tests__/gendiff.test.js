@@ -1,7 +1,7 @@
 import fs from 'fs';
 import gendiff from '../src/index.js';
 
-const testFilesPath = `__fixtures__/`;
+const testFilesPath = '__fixtures__/';
 const expans = ['json', 'yml'];
 
 let resultTree;
