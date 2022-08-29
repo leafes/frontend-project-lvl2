@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const separator = '\n';
 
 const stringify = (value) => {
@@ -7,7 +9,7 @@ const stringify = (value) => {
     case 'boolean':
       return value;
     default:
-      return '[complex value]';
+      return (_.isObject(value)) ? '[complex value]' : `${value}`;
   }
 };
 
