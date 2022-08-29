@@ -3,7 +3,7 @@ import _ from 'lodash';
 const separator = '\n';
 const spaces = 2;
 const tabs = 4;
-const countSpaces = (indent) => ((indent > 1) ? ' '.repeat(spaces ** indent + spaces) : ' '.repeat(spaces));
+const countSpaces = (indent) => ((indent > 1) ? ' '.repeat(spaces ** 2 * indent - 2) : ' '.repeat(spaces));
 const countTabs = (indent) => ' '.repeat(tabs * indent);
 
 const stringify = (value, indent) => {
@@ -12,8 +12,8 @@ const stringify = (value, indent) => {
   }
 
   const result = _.keys(value)
-    .map((key) => `${countTabs(indent)}${' '.repeat(4)}${key}: ${
-      (_.isObject(value[key])) ? stringify(value[key], indent + 1) : value[key]
+    .map((key) => `${countTabs(indent)}${' '.repeat(tabs)}${key}: ${
+      (_.isObject(value[key]) && !_.isEmpty(value)) ? stringify(value[key], indent + 1) : value[key]
     }`);
   return `{${separator}${result.join(separator)}${separator}${countTabs(indent)}}`;
 };
@@ -23,7 +23,7 @@ const getDiffToString = (sign, key, value, indent) => `${countSpaces(indent)}${s
 const getPropertyAction = ({ state }) => {
   const propertyAction = {
     unchanged: ({ key, value }, indent) => getDiffToString(' ', key, value, indent),
-    changed: ({ key, value, valueOld }, indent) => [getDiffToString('-', key, valueOld, indent), getDiffToString('+', key, value, indent)],
+    changed: ({ key, value, valueOld }, indent) => [getDiffToString('-', key, valueOld, indent), getDiffToString('+', key, value, indent)].join(separator),
     deleted: ({ key, valueOld }, indent) => getDiffToString('-', key, valueOld, indent),
     added: ({ key, value }, indent) => getDiffToString('+', key, value, indent),
     children: ({ key, children }, indent, fn) => `${countSpaces(indent)}  ${key}: ${['{', fn(children, indent + 1), `${countSpaces(indent)}  }`].join(separator)}`,
@@ -34,11 +34,10 @@ const getPropertyAction = ({ state }) => {
 
 export default (tree) => {
   const render = (data, indent) => data
-    .map((node) => {
+    .flatMap((node) => {
       const state = getPropertyAction(node);
       return state(node, indent, render);
     })
-    .flat()
     .join(separator);
   return `{${separator}${render(tree, 1)}${separator}}`;
 };
