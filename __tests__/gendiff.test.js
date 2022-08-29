@@ -4,7 +4,6 @@ import gendiff from '../src/index.js';
 const testFilesPath = '__fixtures__/';
 const expans = ['json', 'yml'];
 
-
 describe.each(expans)('gendiff %s', (exp) => {
   const before = `${testFilesPath}file1.${exp}`;
   const after = `${testFilesPath}file2.${exp}`;
