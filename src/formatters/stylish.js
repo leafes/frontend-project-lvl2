@@ -13,8 +13,8 @@ const stringify = (value, indent) => {
 
   const result = _.keys(value)
     .map((key) => `${countTabs(indent)}${' '.repeat(4)}${key}: ${
-        (_.isObject(value[key])) ? stringify(value[key], indent + 1) : value[key]
-      }`);
+      (_.isObject(value[key])) ? stringify(value[key], indent + 1) : value[key]
+    }`);
   return `{${separator}${result.join(separator)}${separator}${countTabs(indent)}}`;
 };
 
