@@ -13,8 +13,8 @@ const stringify = (value) => {
 
 const getPropertyAction = ({ state }) => {
   const propertyAction = {
-    changed: (keys, { value, valueOld }) => `Property '${keys.join('.')}' was changed from ${stringify(valueOld)} to ${stringify(value)}`,
-    deleted: (keys) => `Property '${keys.join('.')}' was deleted`,
+    changed: (keys, { value, valueOld }) => `Property '${keys.join('.')}' was updated. From ${stringify(valueOld)} to ${stringify(value)}`,
+    deleted: (keys) => `Property '${keys.join('.')}' was removed`,
     added: (keys, { value }) => `Property '${keys.join('.')}' was added with value: ${stringify(value)}`,
     children: (keys, { children }, fn) => fn(children, keys),
   };
