@@ -35,8 +35,7 @@ const getPropertyActions = (before, after, property) => {
 };
 
 const differ = (before, after) => (
-  _.union(_.keys(before), _.keys(after))
-    .sort()
+  _.sortBy(_.union(_.keys(before), _.keys(after)))
     .map((key) => {
       const { state, getValue } = getPropertyActions(before, after, key);
       const data = getValue(key, differ);
