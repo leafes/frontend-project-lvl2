@@ -4,10 +4,6 @@ import gendiff from '../src/index.js';
 const testFilesPath = '__fixtures__/';
 const expans = ['json', 'yml'];
 
-const resultStylish = fs.readFileSync(`${testFilesPath}result_tree.txt`, 'utf-8');
-const resultPlain = fs.readFileSync(`${testFilesPath}result_plain.txt`, 'utf-8');
-const resultJson = fs.readFileSync(`${testFilesPath}result_json.txt`, 'utf-8');
-
 describe.each(expans)('gendiff %s', (exp) => {
   const before = `${testFilesPath}file1.${exp}`;
   const after = `${testFilesPath}file2.${exp}`;
